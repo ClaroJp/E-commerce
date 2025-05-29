@@ -22,29 +22,29 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching products:", err);
         }
     }
-function renderResults(results) {
-    featuredSection.innerHTML = "";
+    function renderResults(results) {
+        featuredSection.innerHTML = "";
 
-    if (results.length === 0) {
-        featuredSection.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
-        return;
-    }
-
-    results.forEach(product => {
-        const imageUrl = product.image_url || 'https://via.placeholder.com/150';
-
-        // Determine stock display and button state
-        let stockDisplay = "";
-        let addToCartButton = `<a href="#" class="btn btn-sm btn-outline-primary w-100 add-to-cart-btn" data-id="${product.product_id}">Add to Cart</a>`;
-
-        if (product.stock_quantity === 0) {
-            stockDisplay = `<p class="text-danger fw-bold">Out of Stock</p>`;
-            addToCartButton = `<button class="btn btn-sm btn-outline-secondary w-100" disabled>Add to Cart</button>`;
-        } else {
-            stockDisplay = `<p class="text-success">In Stock: ${product.stock_quantity}</p>`;
+        if (results.length === 0) {
+            featuredSection.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
+            return;
         }
 
-        featuredSection.innerHTML += `
+        results.forEach(product => {
+            const imageUrl = product.image_url || 'https://via.placeholder.com/150';
+
+            // Determine stock display and button state
+            let stockDisplay = "";
+            let addToCartButton = `<a href="#" class="btn btn-sm btn-outline-primary w-100 add-to-cart-btn" data-id="${product.product_id}">Add to Cart</a>`;
+
+            if (product.stock_quantity === 0) {
+                stockDisplay = `<p class="text-danger fw-bold">Out of Stock</p>`;
+                addToCartButton = `<button class="btn btn-sm btn-outline-secondary w-100" disabled>Add to Cart</button>`;
+            } else {
+                stockDisplay = `<p class="text-success">In Stock: ${product.stock_quantity}</p>`;
+            }
+
+            featuredSection.innerHTML += `
         <div class="col-md-4 mb-4">
           <div class="card h-100 shadow-sm">
             <img src="${imageUrl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
@@ -62,8 +62,9 @@ function renderResults(results) {
           </div>
         </div>
       `;
-    });
-}
+        });
+        attachAddToCartListeners();
+    }
 
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.trim().toLowerCase();
@@ -123,4 +124,41 @@ function renderResults(results) {
     fetchProducts().then(() => {
         renderResults(allProducts);
     });
+
+    function attachAddToCartListeners() {
+        const addToCartButtons = featuredSection.querySelectorAll(".add-to-cart-btn");
+        addToCartButtons.forEach(button => {
+            button.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const productId = button.getAttribute("data-id");
+                button.disabled = true;
+                button.textContent = "Adding...";
+                try {
+                    const res = await fetch("/api/cart/add", {
+                        credentials: "include",
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ product_id: productId, quantity: 1 }),
+                    });
+
+                    if (res.status === 401) {
+                        alert("You must be logged in to add items to the cart.");
+                        window.location.href = "/login";
+                        return;
+                    }
+
+                    if (!res.ok) throw new Error("Failed to add to cart");
+
+                    alert("Added to cart!");
+                } catch (err) {
+                    alert("Error adding to cart");
+                    console.error(err);
+                } finally {
+                    button.disabled = false;
+                    button.textContent = "Add to Cart";
+                }
+            });
+        });
+    }
+
 });

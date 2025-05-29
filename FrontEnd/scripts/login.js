@@ -6,11 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const username = document.getElementById("username").value;
+        const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-
+        
         const loginData = {
-            username,
+            email,
             password
         };
 
@@ -21,23 +21,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 "Content-type": "application/json"
             }
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.status === "error") {
-                success.style.display = "none";
-                error.style.display = "block";
-                error.innerText = data.error;
-            } else {
-                error.style.display = "none";
-                success.style.display = "block";
-                success.innerText = data.success;
-
-                if (data.role === "admin") {
-                    window.location.href = "/admin";
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "error") {
+                    success.style.display = "none";
+                    error.style.display = "block";
+                    error.innerText = data.error;
                 } else {
-                    window.location.href = "/homePage";
+                    error.style.display = "none";
+                    success.style.display = "block";
+                    success.innerText = data.success;
+
+                    if (data.role === "admin") {
+                        window.location.href = "/admin";
+                    } else {
+                        window.location.href = "/homePage";
+                    }
                 }
-            }
-        });
+            });
     });
 });
