@@ -1,0 +1,334 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f7f7f7;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+  /* Allow flex children to shrink on smaller screens */
+  flex-wrap: nowrap;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: white;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.profile-summary {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.profile-summary img {
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
+}
+
+.upload-btn {
+  margin-top: 10px;
+  background-color: black;
+  color: white;
+  padding: 6px 16px;
+  border-radius: 5px;
+  font-size: 13px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.upload-btn:hover {
+  background-color: #333;
+}
+
+#photoInput {
+  display: none;
+}
+
+.profile-summary h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  word-break: break-word;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  margin: 0;
+}
+
+.menu li {
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #333;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: left;
+  margin-top: 10px;
+  user-select: none;
+}
+
+.menu li.active,
+.menu li:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Main content */
+.profile-content {
+  flex: 1;
+  background-color: white;
+  padding: 30px;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.profile-content h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.profile-content p {
+  color: #555;
+  line-height: 1.6;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+form label {
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+form input,
+form textarea {
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+form textarea {
+  resize: vertical;
+  height: 80px;
+}
+
+form button {
+  margin-top: 25px;
+  padding: 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 15px;
+}
+
+form button:hover {
+  background-color: #333;
+}
+
+.section {
+  display: none;
+}
+
+.section.active {
+  display: block;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+  width: fit-content;
+}
+
+.back-button:hover {
+  background-color: #333;
+  text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 4px;
+  min-height: 18px; 
+  visibility: hidden;
+}
+
+.error-message.visible {
+  visibility: visible;
+}
+
+/* Wishlist styles */
+#wishlistItems {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 10px;
+}
+
+#wishlistItems li {
+  margin: 8px 0;
+  padding: 8px;
+  background: #f4f4f4;
+  border-radius: 4px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 400px;
+  word-break: break-word;
+}
+
+#wishlistItems button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#wishlistItems button:hover {
+  background-color: #c0392b;
+}
+
+#wishlistInput {
+  padding: 8px;
+  width: 300px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#addWishlistBtn {
+  padding: 8px 12px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#addWishlistBtn:hover {
+  background-color: #2980b9;
+}
+
+/* ----------- Responsive styles ------------ */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    min-height: auto;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 10px;
+    flex-direction: column;  /* STACK vertically */
+    align-items: center;    /* center content */
+    justify-content: flex-start; /* align to top */
+  }
+
+  /* Profile summary becomes block centered on top */
+  .profile-summary {
+    display: flex;
+    flex-direction: column; /* stack photo + upload vertically */
+    align-items: center;
+    margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .profile-summary img {
+    width: 80px;  /* a bit bigger on mobile */
+    height: 80px;
+    margin-bottom: 10px;  /* space between photo and button */
+  }
+
+  .upload-btn {
+    font-size: 14px;
+    padding: 6px 14px;
+  }
+
+  .profile-summary h3 {
+    font-size: 18px;
+    margin: 10px 0 0;
+    white-space: normal; /* allow name to wrap if long */
+  }
+
+  /* Menu below profile summary, full width, vertical list */
+  .menu {
+    display: flex;
+    flex-direction: column;  /* vertical list */
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+
+  .menu li {
+    flex: none;
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 16px;
+    margin: 6px 0;
+    border-radius: 6px;
+  }
+}
+.address-item {
+  border: 1px solid #ddd;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.address-item:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.address-item p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.address-item strong {
+  font-size: 1.1em;
+}
