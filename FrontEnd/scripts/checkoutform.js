@@ -86,10 +86,10 @@ document.addEventListener("DOMContentLoaded", async () => {
           <div class="left d-flex align-items-center">
             <img src="${item.image_url || '/FrontEnd/assets/placeholder.png'}" alt="Product" style="width:80px; height:80px; object-fit:cover;" />
             <div class="cart-item-details ms-3">
-              <div class="cart-item-title fw-bold">${item.name}</div>
-              <div class="cart-item-price">₱${item.price}</div>
-              <div class="cart-item-qty">Quantity: ${item.quantity}</div>
-              <div class="cart-item-price">Subtotal: ₱${(item.price * item.quantity).toFixed(2)}</div>
+              <div class="cart-item-title fw-bold text-light">${item.name}</div>
+              <div class="cart-item-price text-light">₱${item.price}</div>
+              <div class="cart-item-qty text-light">Quantity: ${item.quantity}</div>
+              <div class="cart-item-price text-light">Subtotal: ₱${(item.price * item.quantity).toFixed(2)}</div>
             </div>
           </div>
         `;

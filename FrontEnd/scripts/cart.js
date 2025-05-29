@@ -56,7 +56,7 @@ function loadCartItems() {
               <input type="checkbox" class="form-check-input cart-checkbox" />
               <img src="${imageUrl}" alt="Product" class="rounded" style="width: 80px; height: 80px; object-fit: cover;" />
               <div>
-                <div class="fw-bold">${item.name}</div>
+                <div class="fw-bold text-light">${item.name}</div>
                 <div class="text-muted">₱${Number(item.price).toFixed(2)}</div>
               </div>
             </div>

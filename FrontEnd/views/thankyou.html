@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thank You!</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-    <link rel="stylesheet" href="../styles/style.css" />
-<link rel="stylesheet" href="../styles/style.css">
+
+  <!-- Bootstrap + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="../styles/thankyou.css">
 </head>
+
 <body>
-  <div class="breadcrumb-container bg-dark text-light">
-    <ul class="breadcrumb">
-      <a class="navbar-brand fw-bold fs-3" href="/homepage" style="position: absolute; left: 50px;">QUICK CART</a>
-      <li><a href="/homePage">Thank you for shopping with us</a></li>
-    </ul>
+  <div class="breadcrumb-container text-light">
+    <div class="d-flex justify-content-between align-items-center">
+      <a class="navbar-brand fw-bold fs-3" href="/">QUICK CART</a>
+      <ul class="breadcrumb mb-0">
+        <li class="breadcrumb-item"><a href="/">Thank you for shopping with us</a></li>
+      </ul>
+    </div>
   </div>
-  <div class="container">
+
+  <div class="container d-flex justify-content-center align-items-center flex-grow-1">
     <div class="thank-you-box text-center">
       <i class="bi bi-check-circle-fill"></i>
-      <h2 class="mt-4">Thank You for Your Order!</h2>
-      <p class="text-muted mt-2">Your order has been placed successfully. You will receive a confirmation email shortly.</p>
+      <h2 class="mt-4 text-center">Thank You for Your Order!</h2>
+      <p class="text-light mt-2">Your order has been placed successfully. You will receive a confirmation email shortly.
+      </p>
       <a href="/homePage" class="btn btn-dark mt-4">Continue Shopping</a>
     </div>
   </div>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

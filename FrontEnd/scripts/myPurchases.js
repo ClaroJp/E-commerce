@@ -22,8 +22,8 @@ async function loadOrders() {
       orderCard.className = "col-12";
 
       orderCard.innerHTML = `
-        <div class="card shadow-sm">
-          <div class="card-header bg-secondary text-white">
+        <div class="card shadow-sm text-light" style="background-color: #1e1e1e; border: 1px solid #00d084; border-radius: 1rem;">
+          <div class="card-header text-white" style="background-color: #282828; border-bottom: 1px solid #00d084;">
             <strong>Order #${order.order_id}</strong> 
             <span class="ms-3">Date: ${new Date(order.order_date).toLocaleDateString()}</span>
             <span class="float-end badge bg-warning text-dark">${order.status}</span>
@@ -33,9 +33,9 @@ async function loadOrders() {
               <div class="d-flex align-items-center mb-3 border-bottom pb-2">
                 <img src="${item.image_url || '/assets/default-product.png'}" alt="${item.name}" class="me-3" style="width: 60px; height: 60px; object-fit: cover; border-radius: 5px;">
                 <div class="flex-grow-1">
-                  <h6 class="mb-0">${item.name}</h6>
-                  <small>Quantity: ${item.quantity}</small><br>
-                  <small>Price: $${item.price}</small>
+                  <h6 class="mb-0 text-light">${item.name}</h6>
+                  <small class="text-light">Quantity: ${item.quantity}</small><br>
+                  <small class="text-light">Price: $${item.price}</small>
                 </div>
               </div>
             `).join("")}
