@@ -22,32 +22,48 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching products:", err);
         }
     }
+function renderResults(results) {
+    featuredSection.innerHTML = "";
 
-    function renderResults(results) {
-        featuredSection.innerHTML = "";
+    if (results.length === 0) {
+        featuredSection.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
+        return;
+    }
 
-        if (results.length === 0) {
-            featuredSection.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
-            return;
+    results.forEach(product => {
+        const imageUrl = product.image_url || 'https://via.placeholder.com/150';
+
+        // Determine stock display and button state
+        let stockDisplay = "";
+        let addToCartButton = `<a href="#" class="btn btn-sm btn-outline-primary w-100 add-to-cart-btn" data-id="${product.product_id}">Add to Cart</a>`;
+
+        if (product.stock_quantity === 0) {
+            stockDisplay = `<p class="text-danger fw-bold">Out of Stock</p>`;
+            addToCartButton = `<button class="btn btn-sm btn-outline-secondary w-100" disabled>Add to Cart</button>`;
+        } else {
+            stockDisplay = `<p class="text-success">In Stock: ${product.stock_quantity}</p>`;
         }
 
-        results.forEach(product => {
-            featuredSection.innerHTML += `
+        featuredSection.innerHTML += `
         <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="${product.image_url}" class="card-img-top" alt="${product.name}" />
-            <div class="card-body">
+          <div class="card h-100 shadow-sm">
+            <img src="${imageUrl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
+            <div class="card-body d-flex flex-column">
               <h5 class="card-title">
                 <a href="/product?id=${product.product_id}" class="text-decoration-none">${product.name}</a>
               </h5>
-              <p class="card-text">${product.description}</p>
-              <p class="fw-bold">₱${product.price}</p>
+              <p class="card-text small">${product.description}</p>
+              ${stockDisplay}
+              <div class="mt-auto">
+                <p class="fw-bold">₱${Number(product.price).toFixed(2)}</p>
+                ${addToCartButton}
+              </div>
             </div>
           </div>
         </div>
       `;
-        });
-    }
+    });
+}
 
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.trim().toLowerCase();
