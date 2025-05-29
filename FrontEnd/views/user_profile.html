@@ -3,108 +3,167 @@
 
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>User Dashboard</title>
-  <link rel="stylesheet" href="../styles/user_profile.css" />
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles/user_profile.css">
 </head>
 
 <body>
-  <div class="container">
-    <div class="sidebar">
-      <div class="profile-summary">
-        <img id="profileImage" src="default.jpg" alt="Profile Photo" />
-        <input type="file" id="photoInput" accept="image/*" />
-        <button class="upload-btn" onclick="document.getElementById('photoInput').click()">Upload Photo</button>
-        <h3 id="displayName"></h3>
-      </div>
-      <ul class="menu">
-        <li class="active">My Account</li>
-        <li>My Addresses</li>
-        <li>Settings</li>
-      </ul>
+
+  <nav class="navbar navbar-dark py-3 position-relative border-bottom">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold fs-3" href="/">QUICK CART</a>
+      <!-- Sidebar toggle for mobile -->
+      <button class="btn btn-outline-light d-md-none me-2" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle sidebar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
     </div>
+  </nav>
 
-    <div class="profile-content">
-      <div class="section active">
-        <h2>My Account</h2>
-        <form id="profileForm">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" placeholder="Enter Name" />
-          <div id="nameError" class="error-message"></div>
-
-          <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="Enter Email" />
-          <div id="emailError" class="error-message"></div>
-
-          <label for="contactNumber">Contact Number</label>
-          <input type="text" id="contactNumber" placeholder="Enter Contact Number" />
-          <div id="contactNumberError" class="error-message"></div>
-
-          <label for="bio">Bio</label>
-          <textarea id="bio" placeholder="Write something about yourself"></textarea>
-          <div id="bioError" class="error-message"></div>
-
-          <button type="submit">Save Profile</button>
-
-
-        </form>
-      </div>
-
-      <div class="section">
-        <h2>My Addresses</h2>
-
-        <div id="addressesList">
-          <p>No addresses saved. Add one through the account settings.</p>
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Sidebar -->
+      <nav class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+        <div class="text-center px-3">
+          <img id="profileImage" src="default.jpg" alt="Profile Photo" />
+          <input type="file" id="photoInput" accept="image/*" hidden />
+          <button class="btn upload-btn mb-3" onclick="document.getElementById('photoInput').click()">Upload
+            Photo</button>
+          <h5 id="displayName" class="text-success fw-bold"></h5>
         </div>
 
-        <form id="addressForm">
-          <h3>Add New Address</h3>
+        <div class="nav flex-column nav-pills px-2" id="dashboardTabs" role="tablist" aria-orientation="vertical">
+          <button class="nav-link active" id="account-tab" data-bs-toggle="pill" data-bs-target="#account" type="button"
+            role="tab" aria-controls="account" aria-selected="true">My Account</button>
+          <button class="nav-link" id="addresses-tab" data-bs-toggle="pill" data-bs-target="#addresses" type="button"
+            role="tab" aria-controls="addresses" aria-selected="false">My Addresses</button>
+          <button class="nav-link" id="settings-tab" data-bs-toggle="pill" data-bs-target="#settings" type="button"
+            role="tab" aria-controls="settings" aria-selected="false">Settings</button>
+        </div>
+      </nav>
 
-          <label for="addressLine1">Address</label>
-          <input type="text" id="addressLine1" placeholder="Address" required />
+      <!-- Main content -->
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+        <div class="tab-content" id="dashboardTabsContent">
+          <!-- Account Section -->
+          <section class="tab-pane fade show active" id="account" role="tabpanel" aria-labelledby="account-tab">
+            <h2 class="mb-4 text-success border-bottom border-3 border-success pb-2">My Account</h2>
+            <form id="profileForm" novalidate>
+              <div class="mb-3">
+                <label for="name" class="form-label">Full Name</label>
+                <input type="text" id="name" class="form-control" placeholder="Enter Name" />
+                <div id="nameError" class="error-message"></div>
+              </div>
 
-          <label for="addressLine2">Landmarks</label>
-          <input type="text" id="addressLine2" placeholder="Landmarks (optional)" />
+              <div class="mb-3">
+                <label for="email" class="form-label">Email Address</label>
+                <input type="email" id="email" class="form-control" placeholder="Enter Email" />
+                <div id="emailError" class="error-message"></div>
+              </div>
 
-          <label for="city">City</label>
-          <input type="text" id="city" placeholder="City" required />
+              <div class="mb-3">
+                <label for="contactNumber" class="form-label">Contact Number</label>
+                <input type="text" id="contactNumber" class="form-control" placeholder="Enter Contact Number" />
+                <div id="contactNumberError" class="error-message"></div>
+              </div>
 
-          <label for="state">State/Province</label>
-          <input type="text" id="state" placeholder="State or Province" required />
+              <div class="mb-3">
+                <label for="bio" class="form-label">Bio</label>
+                <textarea id="bio" rows="4" class="form-control"
+                  placeholder="Write something about yourself"></textarea>
+                <div id="bioError" class="error-message"></div>
+              </div>
 
-          <label for="zip">ZIP/Postal Code</label>
-          <input type="text" id="zip" placeholder="ZIP or Postal Code" required />
+              <button type="submit" class="btn btn-success">Save Profile</button>
+            </form>
+          </section>
 
-          <label for="country">Country</label>
-          <input type="text" id="country" placeholder="Country" required />
+          <!-- Addresses Section -->
+          <section class="tab-pane fade" id="addresses" role="tabpanel" aria-labelledby="addresses-tab">
+            <h2 class="mb-4 text-success border-bottom border-3 border-success pb-2">My Addresses</h2>
 
-          <button type="submit">Add Address</button>
-        </form>
-      </div>
+            <div id="addressesList" class="mb-4">
+              <p class="text-muted fst-italic">No addresses saved. Add one through the form below.</p>
+            </div>
 
+            <form id="addressForm" novalidate>
+              <h5 class="mb-3">Add New Address</h5>
 
-      <div class="section">
-        <h2>Settings</h2>
+              <div class="mb-3">
+                <label for="addressLine1" class="form-label">Address</label>
+                <input type="text" id="addressLine1" class="form-control" placeholder="Address" required />
+              </div>
 
-        <form id="changePasswordForm">
-          <label for="currentPassword">Current Password</label>
-          <input type="password" id="currentPassword" placeholder="Enter current password" required />
-          <div id="currentPasswordError" class="error-message"></div>
+              <div class="mb-3">
+                <label for="addressLine2" class="form-label">Landmarks</label>
+                <input type="text" id="addressLine2" class="form-control" placeholder="Landmarks (optional)" />
+              </div>
 
-          <label for="newPassword">New Password</label>
-          <input type="password" id="newPassword" placeholder="Enter new password" required />
-          <div id="newPasswordError" class="error-message"></div>
+              <div class="mb-3">
+                <label for="city" class="form-label">City</label>
+                <input type="text" id="city" class="form-control" placeholder="City" required />
+              </div>
 
-          <label for="confirmPassword">Confirm New Password</label>
-          <input type="password" id="confirmPassword" placeholder="Confirm new password" required />
-          <div id="confirmPasswordError" class="error-message"></div>
+              <div class="mb-3">
+                <label for="state" class="form-label">State/Province</label>
+                <input type="text" id="state" class="form-control" placeholder="State or Province" required />
+              </div>
 
-          <button type="submit">Change Password</button>
-        </form>
+              <div class="mb-3">
+                <label for="zip" class="form-label">ZIP/Postal Code</label>
+                <input type="text" id="zip" class="form-control" placeholder="ZIP or Postal Code" required />
+              </div>
 
-        <div id="passwordSuccessMessage" style="color: green; margin-top: 10px;"></div>
+              <div class="mb-3">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" id="country" class="form-control" placeholder="Country" required />
+              </div>
 
+              <button type="submit" class="btn btn-success">Add Address</button>
+            </form>
+          </section>
 
-        <script src="../scripts/user_profile.js"></script>
+          <!-- Settings Section -->
+          <section class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+            <h2 class="mb-4 text-success border-bottom border-3 border-success pb-2">Settings</h2>
+
+            <form id="changePasswordForm" novalidate>
+              <div class="mb-3">
+                <label for="currentPassword" class="form-label">Current Password</label>
+                <input type="password" id="currentPassword" class="form-control" placeholder="Enter current password"
+                  required />
+                <div id="currentPasswordError" class="error-message"></div>
+              </div>
+
+              <div class="mb-3">
+                <label for="newPassword" class="form-label">New Password</label>
+                <input type="password" id="newPassword" class="form-control" placeholder="Enter new password"
+                  required />
+                <div id="newPasswordError" class="error-message"></div>
+              </div>
+
+              <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <input type="password" id="confirmPassword" class="form-control" placeholder="Confirm new password"
+                  required />
+                <div id="confirmPasswordError" class="error-message"></div>
+              </div>
+
+              <button type="submit" class="btn btn-success">Change Password</button>
+            </form>
+            <div id="passwordSuccessMessage" class="mt-3 text-success fw-semibold"></div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle (Popper + Bootstrap) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../scripts/user_profile.js"></script>
 </body>
 
 </html>

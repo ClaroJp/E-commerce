@@ -7,116 +7,175 @@
   <title>Admin Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <link rel="stylesheet" href="../styles/admin.css" />
+  <style>
+    body {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .sidebar {
+      background-color: #1e1e1e;
+      padding: 1rem;
+      min-height: 100vh;
+      width: 250px;
+      position: fixed;
+    }
+
+    .sidebar h3 {
+      color: #28a745;
+      margin-bottom: 1rem;
+    }
+
+    .sidebar nav a {
+      display: block;
+      color: #ffffff;
+      padding: 0.5rem 0;
+      text-decoration: none;
+    }
+
+    .sidebar nav a:hover {
+      color: #28a745;
+    }
+
+    .content {
+      margin-left: 260px;
+      padding: 2rem;
+    }
+
+    form label {
+      margin-top: 1rem;
+    }
+
+    form input,
+    form textarea,
+    form select {
+      margin-top: 0.3rem;
+    }
+
+    button {
+      margin-top: 1rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
-  <div class="sidebar">
-    <button id="logoutBtn" class="btn btn-link text-danger">Log out</button>
-    <h3>Admin Panel</h3>
-    <nav>
-      <a href="#" id="createCategoryBtn">Create Category</a>
-      <a href="#" id="addProductBtn">Add Product</a>
-      <a href="#" id="viewProductsBtn">View Products & Stocks</a>
-      <a href="#" id="viewSoldBtn">View Sold Products</a>
-    </nav>
+  <!-- Show on mobile: Message -->
+  <div class="text-center d-block d-sm-none p-5">
+    <h4 class="text-warning">Admin dashboard is not available on mobile view.</h4>
   </div>
 
-  <main class="content">
-    <!-- Create Category Form -->
-    <section id="createCategorySection" class="hidden">
-      <h2>Create Category</h2>
-      <form id="createCategoryForm" enctype="multipart/form-data">
-        <label for="categoryName">Category Name</label>
-        <input type="text" id="categoryName" name="name" required />
+  <!-- Admin dashboard: Hidden on mobile -->
+  <div class="d-none d-sm-block">
+    <div class="sidebar">
+      <button id="logoutBtn" class="btn btn-link text-danger">Log out</button>
+      <h3>Admin Panel</h3>
+      <nav>
+        <a href="#" id="createCategoryBtn">Create Category</a>
+        <a href="#" id="addProductBtn">Add Product</a>
+        <a href="#" id="viewProductsBtn">View Products & Stocks</a>
+        <a href="#" id="viewSoldBtn">View Sold Products</a>
+      </nav>
+    </div>
 
-        <label for="categoryDescription">Description (optional)</label>
-        <textarea id="categoryDescription" name="description" rows="2"></textarea>
+    <main class="content">
+      <!-- Create Category Form -->
+      <section id="createCategorySection" class="hidden">
+        <h2>Create Category</h2>
+        <form id="createCategoryForm" enctype="multipart/form-data">
+          <label for="categoryName">Category Name</label>
+          <input type="text" id="categoryName" name="name" class="form-control" required />
 
-        <label for="categoryImage">Category Image</label>
-        <input type="file" id="categoryImage" name="image" accept="image/*" required />
+          <label for="categoryDescription">Description (optional)</label>
+          <textarea id="categoryDescription" name="description" rows="2" class="form-control"></textarea>
 
-        <button type="submit">Add Category</button>
-      </form>
+          <label for="categoryImage">Category Image</label>
+          <input type="file" id="categoryImage" name="image" accept="image/*" class="form-control" required />
 
-      <p id="categorySuccessMessage" style="color: green; display: none;"></p>
-      <p id="categoryErrorMessage" style="color: red; display: none;"></p>
-    </section>
+          <button type="submit" class="btn btn-success">Add Category</button>
+        </form>
+        <p id="categorySuccessMessage" style="color: green; display: none;"></p>
+        <p id="categoryErrorMessage" style="color: red; display: none;"></p>
+      </section>
 
-    <!-- Add Product Form -->
-    <section id="addProductSection" class="hidden">
-      <h2>Add Product</h2>
-      <form id="addProductForm" enctype="multipart/form-data">
-        <label for="productName">Product Name</label>
-        <input type="text" id="productName" name="name" required />
+      <!-- Add Product Form -->
+      <section id="addProductSection" class="hidden">
+        <h2>Add Product</h2>
+        <form id="addProductForm" enctype="multipart/form-data">
+          <label for="productName">Product Name</label>
+          <input type="text" id="productName" name="name" class="form-control" required />
 
-        <label for="productDescription">Description</label>
-        <textarea id="productDescription" name="description" rows="3" required></textarea>
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" name="description" rows="3" class="form-control" required></textarea>
 
-        <label for="productPrice">Price</label>
-        <input type="number" id="productPrice" name="price" step="0.01" min="0" required />
+          <label for="productPrice">Price</label>
+          <input type="number" id="productPrice" name="price" step="0.01" min="0" class="form-control" required />
 
-        <label for="productStock">Stock Quantity</label>
-        <input type="number" id="productStock" name="stock_quantity" min="0" required />
+          <label for="productStock">Stock Quantity</label>
+          <input type="number" id="productStock" name="stock_quantity" min="0" class="form-control" required />
 
-        <label for="productCategory">Category</label>
-        <!-- Use a dropdown select for category, loaded dynamically -->
-        <select id="productCategory" name="category_id" required>
-          <!-- categories loaded by JS -->
-        </select>
+          <label for="productCategory">Category</label>
+          <select id="productCategory" name="category_id" class="form-select" required>
+            <!-- categories loaded dynamically -->
+          </select>
 
-        <label for="productImage">Product Image</label>
-        <input type="file" id="productImage" name="image" accept="image/*" required />
+          <label for="productImage">Product Image</label>
+          <input type="file" id="productImage" name="image" accept="image/*" class="form-control" required />
 
-        <button type="submit">Add Product</button>
-      </form>
-      <p id="successMessage" style="color: green; display: none;"></p>
-      <p id="errorMessage" style="color: red; display: none;"></p>
-    </section>
+          <button type="submit" class="btn btn-success">Add Product</button>
+        </form>
+        <p id="successMessage" style="color: green; display: none;"></p>
+        <p id="errorMessage" style="color: red; display: none;"></p>
+      </section>
 
-    <!-- View Products Table -->
-    <section id="viewProductsSection" class="hidden">
-      <h2>Current Products & Stocks</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Price</th>
-            <th>Stock</th>
-            <th>Category</th>
-            <th>Image</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="productsTableBody">
-          <!-- Products loaded dynamically -->
-        </tbody>
-      </table>
-    </section>
+      <!-- View Products Table -->
+      <section id="viewProductsSection" class="hidden">
+        <h2>Current Products & Stocks</h2>
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Stock</th>
+              <th>Category</th>
+              <th>Image</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="productsTableBody">
+            <!-- Products loaded dynamically -->
+          </tbody>
+        </table>
+      </section>
 
-    <!-- View Sold Products Table -->
-    <section id="viewSoldSection" class="hidden">
-      <h2>Sold Products</h2>
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Product ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Quantity Sold</th>
-            <th>Sale Date</th>
-            <th>Order Status</th> <!-- new column -->
-            <th>Actions</th> <!-- for saving/canceling if needed -->
-          </tr>
-        </thead>
-        <tbody id="soldProductsTableBody">
-          <!-- filled by JS -->
-        </tbody>
-      </table>
-    </section>
-  </main>
+      <!-- View Sold Products Table -->
+      <section id="viewSoldSection" class="hidden">
+        <h2>Sold Products</h2>
+        <table class="table table-dark table-striped">
+          <thead>
+            <tr>
+              <th>Product ID</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Quantity Sold</th>
+              <th>Sale Date</th>
+              <th>Order Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="soldProductsTableBody">
+            <!-- filled by JS -->
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
   <script src="../scripts/admin.js"></script>
   <script src="../scripts/addproduct.js"></script>
   <script src="../scripts/logout.js"></script>

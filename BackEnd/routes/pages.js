@@ -19,10 +19,6 @@ router.get("/homePage", authMiddleware, (req, res) => {
     res.sendFile("index.html", { root: "./FrontEnd/views" });
 });
 
-router.get("/addProduct", authMiddleware, (req, res) => {
-    res.sendFile("addProduct.html", { root: "./FrontEnd/views" });
-});
-
 router.get("/cart", authMiddleware, (req, res) => {
     res.sendFile("cart.html", { root: "./FrontEnd/views" });
 });

@@ -1,5 +1,3 @@
-// search.js
-
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById("searchInput");
     const searchForm = document.getElementById("searchForm");
@@ -8,11 +6,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoriesSection = document.getElementById("categories-container");
     const hotSalesSection = document.getElementById("hot-sales-container");
     const featuredSection = document.getElementById("products-container");
+
     const hotSales = document.getElementById("hot-sales");
     const featured = document.getElementById("featured");
+
+    let fallbackContainer = null;
+    if (!featuredSection) {
+        fallbackContainer = document.createElement("div");
+        fallbackContainer.className = "container mt-4";
+        fallbackContainer.id = "search-results";
+        document.body.appendChild(fallbackContainer);
+    }
+
     let allProducts = [];
 
-    // Fetch products from your API or use homePage.js global data
     async function fetchProducts() {
         try {
             const res = await fetch("/api/products");
@@ -22,18 +29,21 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error("Error fetching products:", err);
         }
     }
+
     function renderResults(results) {
-        featuredSection.innerHTML = "";
+        const container = featuredSection || fallbackContainer;
+        if (!container) return;
+
+        container.innerHTML = "";
 
         if (results.length === 0) {
-            featuredSection.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
+            container.innerHTML = `<div class="col-12 text-center text-danger">No products found.</div>`;
             return;
         }
 
         results.forEach(product => {
             const imageUrl = product.image_url || 'https://via.placeholder.com/150';
 
-            // Determine stock display and button state
             let stockDisplay = "";
             let addToCartButton = `<a href="#" class="btn btn-sm btn-outline-primary w-100 add-to-cart-btn" data-id="${product.product_id}">Add to Cart</a>`;
 
@@ -44,39 +54,65 @@ document.addEventListener("DOMContentLoaded", () => {
                 stockDisplay = `<p class="text-success">In Stock: ${product.stock_quantity}</p>`;
             }
 
-            featuredSection.innerHTML += `
-        <div class="col-md-4 mb-4">
-          <div class="card h-100 shadow-sm">
-            <img src="${imageUrl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">
-                <a href="/product?id=${product.product_id}" class="text-decoration-none">${product.name}</a>
-              </h5>
-              <p class="card-text small">${product.description}</p>
-              ${stockDisplay}
-              <div class="mt-auto">
-                <p class="fw-bold">₱${Number(product.price).toFixed(2)}</p>
-                ${addToCartButton}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
+            container.innerHTML += `
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="${imageUrl}" class="card-img-top" alt="${product.name}" style="height: 200px; object-fit: cover;">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <a href="/product?id=${product.product_id}" class="text-decoration-none">${product.name}</a>
+                            </h5>
+                            <p class="card-text small">${product.description}</p>
+                            ${stockDisplay}
+                            <div class="mt-auto">
+                                <p class="fw-bold">₱${Number(product.price).toFixed(2)}</p>
+                                ${addToCartButton}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
         });
+
         attachAddToCartListeners();
+    }
+
+    function handleSearch(keyword) {
+        if (!keyword) return;
+
+        const results = allProducts.filter(product =>
+            product.name.toLowerCase().includes(keyword.toLowerCase())
+        );
+
+        if (categoriesSection) categoriesSection.style.display = "none";
+        if (hotSalesSection) hotSalesSection.style.display = "none";
+        if (hotSales) hotSales.style.display = "none";
+        if (featured) featured.style.display = "none";
+
+        renderResults(results);
+        suggestions.innerHTML = "";
     }
 
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.trim().toLowerCase();
-
         suggestions.innerHTML = "";
 
+        const container = featuredSection || fallbackContainer;
+
         if (!query) {
-            categoriesSection.style.display = "";
-            hotSalesSection.style.display = "";
-            renderResults(allProducts);
+            if (categoriesSection) categoriesSection.style.display = "";
+            if (hotSalesSection) hotSalesSection.style.display = "";
+            if (hotSales) hotSales.style.display = "";
+            if (featured) featured.style.display = "";
+
+            if (container) {
+                container.innerHTML = ""; // clear current content
+                // Re-render all products or featured products only:
+                renderResults(allProducts); // or filter featured if you have that data
+            }
             return;
         }
+
 
         const matches = allProducts.filter(product =>
             product.name.toLowerCase().includes(query)
@@ -101,32 +137,13 @@ document.addEventListener("DOMContentLoaded", () => {
         handleSearch(searchInput.value.trim());
     });
 
-    function handleSearch(keyword) {
-        if (!keyword) return;
-
-        const results = allProducts.filter(product =>
-            product.name.toLowerCase().includes(keyword.toLowerCase())
-        );
-
-        // Hide other sections
-        categoriesSection.style.display = "none";
-        hotSalesSection.style.display = "none";
-        hotSales.style.display = "none";
-        featured.style.display = "none";
-        // Render matching results
-        renderResults(results);
-
-        // Clear suggestions
-        suggestions.innerHTML = "";
-    }
-
-    // Initial fetch
-    fetchProducts().then(() => {
-        renderResults(allProducts);
-    });
+    fetchProducts();
 
     function attachAddToCartListeners() {
-        const addToCartButtons = featuredSection.querySelectorAll(".add-to-cart-btn");
+        const container = featuredSection || fallbackContainer;
+        if (!container) return;
+
+        const addToCartButtons = container.querySelectorAll(".add-to-cart-btn");
         addToCartButtons.forEach(button => {
             button.addEventListener("click", async (e) => {
                 e.preventDefault();
@@ -160,5 +177,4 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-
 });

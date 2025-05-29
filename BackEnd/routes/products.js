@@ -71,6 +71,7 @@ router.post(
   "/products",
   authMiddleware,
   (req, res, next) => {
+    console.log("POST /products route called");
     upload.single("image")(req, res, function (err) {
       if (err) {
         console.error("Multer error:", err);

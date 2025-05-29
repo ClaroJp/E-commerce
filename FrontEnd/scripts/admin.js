@@ -121,36 +121,6 @@ async function loadCategoriesIntoProductForm() {
   }
 }
 
-addProductForm.addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form); // <-- grabs all inputs including the file
-
-  try {
-    const response = await fetch("/api/products", {
-      method: "POST",
-      body: formData, // no need to set content-type, browser does it automatically
-    });
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert("Product added!");
-      form.reset();
-      loadProducts();
-    } else {
-      alert(result.error || "Something went wrong");
-    }
-  } catch (err) {
-    console.error("Submit error:", err);
-    alert("Error submitting form");
-  }
-});
-
-
-// === PRODUCTS TABLE EDITABLE ===
-
 // Store original product data for cancel
 let originalProductData = {};
 

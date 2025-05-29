@@ -111,7 +111,7 @@ async function renderCategoryPage() {
 
   container.innerHTML = `
     <section class="mb-5">
-      <h2 class="mb-3">${categoryName}</h2>
+      <h2 class="mb-3 text-center">${categoryName}</h2>
       <div class="row">
         ${products.length > 0
       ? products.map(createProductCard).join("")

@@ -207,15 +207,27 @@ async function loadAddresses() {
     // Create list of addresses
     addressesList.innerHTML = "";
     addresses.forEach(addr => {
-      const div = document.createElement("div");
-      div.className = "address-item";
-      div.innerHTML = `
-        <p><strong>${addr.address_line1}</strong> ${addr.address_line2 || ""}</p>
-        <p>${addr.city}, ${addr.state} ${addr.zip}</p>
-        <p>${addr.country}</p>
-      `;
-      addressesList.appendChild(div);
+      const card = document.createElement("div");
+      card.className = "card mb-3 bg-dark text-light border border-secondary shadow-sm";
+      card.style.maxWidth = "540px";
+
+      card.innerHTML = `
+    <div class="row g-0 align-items-center">
+      <div class="col-md-2 text-center">
+        <i class="bi bi-geo-alt-fill fs-2 text-info"></i>
+      </div>
+      <div class="col-md-10">
+        <div class="card-body p-2">
+          <h5 class="card-title mb-1">${addr.address_line1} ${addr.address_line2 || ""}</h5>
+          <p class="card-text mb-1">${addr.city}, ${addr.state} ${addr.zip}</p>
+          <p class="card-text"><small class="text-muted">${addr.country}</small></p>
+        </div>
+      </div>
+    </div>
+  `;
+      addressesList.appendChild(card);
     });
+
   } catch (err) {
     addressesList.innerHTML = "<p>Error loading addresses.</p>";
     console.error(err);
@@ -333,4 +345,14 @@ changePasswordForm.addEventListener("submit", async (e) => {
     passwordSuccessMessage.textContent = "Error changing password.";
     passwordSuccessMessage.style.color = "red";
   }
+  
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const sidebar = document.getElementById('sidebar');
+  const toggleBtn = document.querySelector('[data-bs-toggle="collapse"]');
+
+  toggleBtn.addEventListener('click', () => {
+    sidebar.classList.toggle('show');
+  });
 });
