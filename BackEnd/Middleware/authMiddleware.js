@@ -26,7 +26,6 @@ const authMiddleware = async (req, res, next) => {
       if (req.originalUrl.startsWith("/api")) {
         return res.status(401).json({ success: false, message: "Unauthorized" });
       }
-      return res.redirect("/unauthorized");
     }
 
     req.user = results[0];
@@ -35,7 +34,6 @@ const authMiddleware = async (req, res, next) => {
     if (req.originalUrl.startsWith("/api")) {
       return res.status(401).json({ success: false, message: "Unauthorized" });
     }
-    return res.redirect("/unauthorized");
   }
 };
 
