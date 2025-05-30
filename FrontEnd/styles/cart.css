@@ -1,72 +1,97 @@
-    body {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
+body {
+  background-color: #f0f2f5;
+  color: #212529;
+}
 
-    .navbar {
-      background-color: #0f3d2e;
-    }
+.navbar {
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
+}
 
-    .navbar-brand {
-      color: #00d084 !important;
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
+.navbar-brand {
+  color: #4CAF50 !important;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
-    .breadcrumb-item.active {
-      color: #a5d6a7;
-    }
+/* Navbar "Cart" title */
+.navbar h1.text-white {
+  color: #343a40 !important;
+}
 
-    .card {
-      background-color: #1e1e1e;
-      border: 1px solid #00d084;
-      border-radius: 1rem;
-    }
+/* Active breadcrumb item */
+.breadcrumb-item.active {
+  color: #4CAF50;
+}
 
-    .card-header {
-      background-color: #0f3d2e;
-      color: #00d084;
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
-    }
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  color: #212529;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
 
-    .card-footer {
-      background-color: #1b1b1b;
-      border-bottom-left-radius: 1rem;
-      border-bottom-right-radius: 1rem;
-      color: #fff;
-    }
+.card-header {
+  background-color: #ffffff;
+  color: #343a40;
+  border-bottom: 1px solid #e9ecef;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
 
-    #checkoutBtn {
-      background-color: #00d084;
-      border: none;
-      color: #000;
-    }
+.card-footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  color: #212529;
+}
 
-    #checkoutBtn:hover {
-      background-color: #00b373;
-      color: #000;
-    }
+/* Checkout button */
+#checkoutBtn {
+  background-color: #4CAF50;
+  border: none;
+  color: #ffffff;
+}
 
-    .text-muted {
-      color: #9e9e9e !important;
-    }
+#checkoutBtn:hover {
+  background-color: #45a049;
+  color: #ffffff;
+}
 
-    @media (max-width: 576px) {
-      #cart-main {
-        display: none;
-      }
+.text-muted {
+  color: #6c757d !important;
+}
 
-      #mobile-warning {
-        display: block;
-        padding: 5rem 2rem;
-        text-align: center;
-        color: #ccc;
-      }
-    }
+/* Subtotal amount */
+#cart-subtotal {
+  color: #4CAF50;
+}
 
-    @media (min-width: 577px) {
-      #mobile-warning {
-        display: none;
-      }
-    }
+/* Mobile warning section */
+#mobile-warning {
+  padding: 5rem 2rem;
+  text-align: center;
+  color: #6c757d;
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin: 20px;
+}
+
+@media (max-width: 576px) {
+  #cart-main {
+    display: none;
+  }
+
+  #mobile-warning {
+    display: block;
+  }
+}
+
+@media (min-width: 577px) {
+  #mobile-warning {
+    display: none;
+  }
+}

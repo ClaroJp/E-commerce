@@ -1,45 +1,170 @@
-    body {
-      background-color: #121212;
-      color: #ffffff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap');
 
+body {
+  background-color: #f0f2f5;
+  color: #333d47;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #2c313a;
+}
+
+.breadcrumb-container {
+    padding: 15px 50px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    border-bottom: 1px solid #e0e4e8;
+}
+
+.breadcrumb-container > div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumb-container .navbar-brand {
+    color: #28a745 !important;
+    font-weight: 700;
+    font-size: 1.8rem;
+    letter-spacing: 1.5px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.breadcrumb-container .navbar-brand:hover {
+    color: #39e672 !important;
+    opacity: 0.9;
+}
+
+.breadcrumb {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+}
+
+.breadcrumb-item {
+    font-size: 0.95rem;
+    color: #8c96a3;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-item a {
+    color: #8c96a3;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-item a:hover {
+    color: #28a745;
+}
+
+.container.d-flex.justify-content-center.align-items-center.flex-grow-1 {
+    flex-grow: 1;
+    padding: 40px 20px;
+}
+
+.thank-you-box {
+    background-color: #ffffff;
+    border: 1px solid #e0e4e8;
+    border-radius: 0.8rem;
+    padding: 3rem 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    max-width: 500px;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.thank-you-box i.bi-check-circle-fill {
+    font-size: 5rem;
+    color: #28a745;
+    margin-bottom: 1.5rem;
+}
+
+.thank-you-box h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    color: #2c313a;
+}
+
+.thank-you-box p {
+    font-size: 1.1rem;
+    color: #555e6b;
+    margin-top: 0.5rem;
+    line-height: 1.5;
+}
+
+.thank-you-box .btn {
+    display: inline-block;
+    background-color: #28a745;
+    color: #ffffff;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    border: none;
+    font-size: 1.05rem;
+    margin-top: 1.5rem;
+}
+
+.thank-you-box .btn:hover {
+    background-color: #1e6c2e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(40, 167, 69, 0.25);
+}
+
+@media (max-width: 768px) {
     .breadcrumb-container {
-      padding: 1rem;
-      background-color: #0f3d2e;
+        padding: 15px 20px;
     }
-
-    .breadcrumb a {
-      color: #00ffae;
-      text-decoration: none;
+    .breadcrumb-container > div {
+        flex-direction: column;
+        align-items: flex-start;
     }
-
+    .breadcrumb {
+        margin-top: 10px;
+        justify-content: center;
+        width: 100%;
+    }
     .thank-you-box {
-      background-color: #1e1e1e;
-      border-radius: 1rem;
-      padding: 3rem 2rem;
-      margin-top: 5rem;
-      box-shadow: 0 0 20px rgba(0, 255, 174, 0.15);
+        padding: 2rem 1.5rem;
     }
+    .thank-you-box h2 {
+        font-size: 1.8rem;
+    }
+    .thank-you-box i.bi-check-circle-fill {
+        font-size: 4rem;
+    }
+    .thank-you-box p {
+        font-size: 1rem;
+    }
+    .thank-you-box .btn {
+        padding: 10px 25px;
+        font-size: 1rem;
+    }
+}
 
-    .thank-you-box i {
-      font-size: 5rem;
-      color: #00ffae;
+@media (max-width: 480px) {
+    .breadcrumb-container .navbar-brand {
+        font-size: 1.5rem;
     }
-
-    .btn-dark {
-      background-color: #00ffae;
-      color: #000;
-      border: none;
+    .breadcrumb-item {
+        font-size: 0.85rem;
     }
-
-    .btn-dark:hover {
-      background-color: #00cc8f;
-      color: #000;
-    }
-
-    a.navbar-brand {
-      color: #00ffae !important;
-    }
+}

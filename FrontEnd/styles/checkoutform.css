@@ -1,75 +1,133 @@
 body {
-  background-color: #121212;
-  color: #ffffff;
+  background-color: #f0f2f5;
+  color: #212529;
 }
 
 .navbar {
-  background-color: #0f3d2e;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 .navbar-brand {
-  color: #00ffae !important;
+  color: #4CAF50 !important;
   font-weight: bold;
   font-size: 1.5rem;
 }
 
 .navbar-text {
-  color: #bbf7d0;
+  color: #6c757d;
   font-size: 1.25rem;
 }
 
-.card {
-  background-color: #1f1f1f;
-  border: 1px solid #00ffae;
-  border-radius: 1rem;
+/* Search bar styling */
+.form-control.search-input {
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  color: #495057;
+}
+
+.btn-success {
+  background-color: #4CAF50;
+  border-color: #4CAF50;
   color: #ffffff;
+}
+.btn-success:hover {
+  background-color: #45a049;
+  border-color: #45a049;
+}
+
+/* Section headings */
+h1.text-center, h2, h3, h4, h5, h6 {
+  color: #4CAF50;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  color: #212529;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
 
 .card-header {
-  background-color: #0f3d2e;
-  color: #00ffae;
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
+  background-color: #ffffff;
+  color: #343a40;
+  border-bottom: 1px solid #e9ecef;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+/* Highlighted text (e.g., names or status) */
+.card-body .text-success {
+  color: #4CAF50 !important;
 }
 
 .form-control,
 .form-select {
-  background-color: #2e2e2e;
-  color: #ffffff;
-  border: 1px solid #00ffae;
+  background-color: #ffffff;
+  color: #495057;
+  border: 1px solid #ced4da;
 }
 
+/* Green focus effect */
 .form-control:focus,
 .form-select:focus {
-  border-color: #00b373;
-  box-shadow: 0 0 0 0.2rem rgba(0, 208, 132, 0.25);
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25);
 }
 
+.btn-secondary, .btn-light {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
+}
+
+.btn-secondary:hover, .btn-light:hover {
+  background-color: #5a6268;
+  border-color: #5a6268;
+}
+
+/* Main action button (e.g., Place Order) */
 .btn-dark {
-  background-color: #00ffae;
+  background-color: #4CAF50;
   border: none;
-  color: #000000;
+  color: #ffffff;
 }
 
 .btn-dark:hover {
-  background-color: #00cc8f;
-  color: #000000;
+  background-color: #45a049;
+  color: #ffffff;
 }
 
+/* Outline action button (e.g., Add New Address) */
 .btn-outline-dark {
-  color: #00ffae;
-  border-color: #00ffae;
+  color: #4CAF50;
+  border-color: #4CAF50;
 }
 
 .btn-outline-dark:hover {
-  background-color: #00ffae;
-  color: #000000;
+  background-color: #4CAF50;
+  color: #ffffff;
 }
 
+/* Error messages */
 #message {
-  color: #ff6b6b;
+  color: #dc3545;
 }
 
+/* Section container for new address */
 .bg-dark-subtle {
-  background-color: #2a2a2a !important;
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  border: 1px solid #dee2e6;
+}
+
+/* Override for text heading in section */
+h6.text-white {
+  color: #343a40 !important;
+}
+
+/* Highlight cart total in checkout */
+#cartTotal {
+  color: #4CAF50 !important;
 }

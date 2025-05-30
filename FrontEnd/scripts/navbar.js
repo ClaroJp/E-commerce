@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (data.loggedIn) {
       userSection.innerHTML = `
         <div class="dropdown me-3">
-          <a href="#" class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person fs-5"></i> ${data.user.name || ''}
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end bg-dark text-light" aria-labelledby="userDropdown" style="border:none;">
-            <li><a class="dropdown-item text-light" href="/profile">My Account</a></li>
-            <li><a class="dropdown-item text-light" href="/myPurchases">My Purchase</a></li>
-            <li><hr class="dropdown-divider bg-success"></li>
-            <button id="logoutBtn" class="btn btn-link dropdown-item text-danger">Log out</button>
-          </ul>
-        </div>
-        <a class="nav-link text-light" href="/cart"><i class="bi bi-cart4 fs-5"></i></a>
+  <a href="#" class="nav-link dropdown-toggle text-light" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <i class="bi bi-person fs-5"></i> ${data.user.name || ''}
+  </a>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+    <li><a class="dropdown-item" href="/profile">My Account</a></li>
+    <li><a class="dropdown-item" href="/myPurchases">My Purchase</a></li>
+    <li><hr class="dropdown-divider"></li>
+    <li><a id="logoutBtn" class="dropdown-item logout-item" href="#">Log out</a></li>
+  </ul>
+</div>
+<a class="nav-link text-light" href="/cart"><i class="bi bi-cart4 fs-5"></i></a>
       `;
 
       // Add logout handler
