@@ -9,32 +9,34 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <style>
     body {
-      background-color: #121212;
-      color: #ffffff;
+      background-color: #f0f2f5; /* Light gray background */
+      color: #212529; /* Dark text */
     }
 
     .sidebar {
-      background-color: #1e1e1e;
+      background-color: #ffffff; /* White sidebar background */
       padding: 1rem;
       min-height: 100vh;
       width: 250px;
       position: fixed;
+      border-right: 1px solid #e0e0e0; /* Light gray border */
+      box-shadow: 2px 0 5px rgba(0,0,0,0.02); /* Subtle shadow */
     }
 
     .sidebar h3 {
-      color: #28a745;
+      color: #4CAF50; /* Green for Admin Panel title */
       margin-bottom: 1rem;
     }
 
     .sidebar nav a {
       display: block;
-      color: #ffffff;
+      color: #495057; /* Darker gray for menu links */
       padding: 0.5rem 0;
       text-decoration: none;
     }
 
     .sidebar nav a:hover {
-      color: #28a745;
+      color: #4CAF50; /* Green on hover */
     }
 
     .content {
@@ -44,31 +46,108 @@
 
     form label {
       margin-top: 1rem;
+      color: #343a40; /* Darker gray for form labels */
     }
 
     form input,
     form textarea,
     form select {
       margin-top: 0.3rem;
+      background-color: #ffffff; /* White input background */
+      color: #495057; /* Darker text for input */
+      border: 1px solid #ced4da; /* Light gray border */
+    }
+
+    form input:focus,
+    form textarea:focus,
+    form select:focus {
+      border-color: #4CAF50; /* Green focus border */
+      box-shadow: 0 0 0 0.2rem rgba(76, 175, 80, 0.25); /* Green shadow on focus */
     }
 
     button {
       margin-top: 1rem;
     }
 
+    .btn-success {
+      background-color: #4CAF50; /* Green button */
+      border-color: #4CAF50;
+      color: #ffffff; /* White text */
+    }
+
+    .btn-success:hover {
+      background-color: #45a049; /* Darker green on hover */
+      border-color: #45a049;
+    }
+
+    .btn-danger {
+      background-color: #dc3545; /* Standard red for danger/logout */
+      border-color: #dc3545;
+      color: #ffffff;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    .btn-link.text-danger { /* For logout button */
+      color: #dc3545 !important;
+    }
+    .btn-link.text-danger:hover {
+        color: #c82333 !important;
+    }
+
+
     .hidden {
       display: none;
     }
+
+    /* Table styles */
+    .table {
+      --bs-table-bg: #ffffff; /* White table background */
+      --bs-table-striped-bg: #f8f9fa; /* Light striped row background */
+      --bs-table-color: #212529; /* Dark text for table */
+      --bs-table-border-color: #dee2e6; /* Light border color */
+    }
+
+    .table thead {
+        color: #495057; /* Darker text for table headers */
+        background-color: #e9ecef; /* Light gray header background */
+    }
+
+    .table-striped tbody tr:nth-of-type(odd) {
+      background-color: var(--bs-table-striped-bg);
+    }
+
+    /* Message styles for success/error */
+    p[style*="color: green;"] {
+        color: #4CAF50 !important; /* Green for success messages */
+    }
+    p[style*="color: red;"] {
+        color: #dc3545 !important; /* Red for error messages */
+    }
+
+    /* Mobile warning styles */
+    .text-warning { /* Re-purposing for the light theme */
+        color: #6c757d !important; /* Darker gray for warning text */
+    }
+    .text-center.d-block.d-sm-none.p-5 {
+        background-color: #ffffff; /* White background for mobile warning */
+        border: 1px solid #dee2e6; /* Light gray border */
+        border-radius: 0.5rem;
+        margin: 20px; /* Add some margin */
+    }
+
+
   </style>
 </head>
 
 <body>
-  <!-- Show on mobile: Message -->
   <div class="text-center d-block d-sm-none p-5">
-    <h4 class="text-warning">Admin dashboard is not available on mobile view.</h4>
+    <h4>Admin dashboard is not available on mobile view.</h4>
   </div>
 
-  <!-- Admin dashboard: Hidden on mobile -->
   <div class="d-none d-sm-block">
     <div class="sidebar">
       <button id="logoutBtn" class="btn btn-link text-danger">Log out</button>
@@ -82,7 +161,6 @@
     </div>
 
     <main class="content">
-      <!-- Create Category Form -->
       <section id="createCategorySection" class="hidden">
         <h2>Create Category</h2>
         <form id="createCategoryForm" enctype="multipart/form-data">
@@ -101,7 +179,6 @@
         <p id="categoryErrorMessage" style="color: red; display: none;"></p>
       </section>
 
-      <!-- Add Product Form -->
       <section id="addProductSection" class="hidden">
         <h2>Add Product</h2>
         <form id="addProductForm" enctype="multipart/form-data">
@@ -119,8 +196,7 @@
 
           <label for="productCategory">Category</label>
           <select id="productCategory" name="category_id" class="form-select" required>
-            <!-- categories loaded dynamically -->
-          </select>
+            </select>
 
           <label for="productImage">Product Image</label>
           <input type="file" id="productImage" name="image" accept="image/*" class="form-control" required />
@@ -131,10 +207,9 @@
         <p id="errorMessage" style="color: red; display: none;"></p>
       </section>
 
-      <!-- View Products Table -->
       <section id="viewProductsSection" class="hidden">
         <h2>Current Products & Stocks</h2>
-        <table class="table table-dark table-striped">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -148,15 +223,13 @@
             </tr>
           </thead>
           <tbody id="productsTableBody">
-            <!-- Products loaded dynamically -->
-          </tbody>
+            </tbody>
         </table>
       </section>
 
-      <!-- View Sold Products Table -->
       <section id="viewSoldSection" class="hidden">
         <h2>Sold Products</h2>
-        <table class="table table-dark table-striped">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th>Product ID</th>
@@ -169,8 +242,7 @@
             </tr>
           </thead>
           <tbody id="soldProductsTableBody">
-            <!-- filled by JS -->
-          </tbody>
+            </tbody>
         </table>
       </section>
     </main>
